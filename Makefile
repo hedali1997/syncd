@@ -15,7 +15,9 @@ linux: clean build-linux install
 .PHONY: build
 build:
 	@echo "build syncd start >>>"
-	GO111MODULE=on  GOPROXY=https://goproxy.cn,direct  $(GO_CMD) mod tidy
+	go env -w GO111MODULE=on 
+	go env -w GOPROXY=https://goproxy.cn,direct 
+	$(GO_CMD) mod tidy
 	$(GO_CMD) build -o $(SYNCD_BIN) ./syncd/main.go
 	@echo ">>> build syncd complete"
 
